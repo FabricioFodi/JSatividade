@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pergunta</title>
+</head>
+<style>
+    * {
+        font-size: 70px;
+    }
+
+    body {
+        max-width: 100%;
+    }
+
+    .container {
+        display: absolute;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 90px;
+    }
+
+    .botoes {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .botao {
+        background-color: white;
+        color: rgb(253, 62, 125);
+        border-radius: 15px;
+        margin: 0 18px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2>me da um M&M?</h2>
+        <div class="botoes">
+            <button id="sim" class="botao">Sim</button>
+            <button id="nao" class="botao">Não</button>
+        </div>
+    </div>
+
+    <script>
+
+        // Código feita na brincadeira
+        const botaoNao = document.getElementById("nao");
+        const botaoSim = document.getElementById("sim");
+
+        botaoNao.addEventListener("mouseover", function () {
+            const telaWidth = window.innerWidth;
+            const telaHeight = window.innerHeight;
+
+            const larguraBotao = botaoNao.offsetWidth;
+            const alturaBotao = botaoNao.offsetHeight;
+            
+            const padding = 20;
+            const randomX = Math.floor(Math.random() * (telaWidth - larguraBotao - 2 * padding));
+            const randomY = Math.floor(Math.random() * (telaHeight - alturaBotao - 2 * padding));
+
+            botaoNao.style.position = "absolute";
+            botaoNao.style.left = randomX + "px";
+            botaoNao.style.top = randomY + "px";
+            
+        });
+
+        let contadorMM = 0;
+        botaoSim.addEventListener("click", function () {
+            contadorMM++;
+            document.querySelector("h2").textContent = `Você me deve ${contadorMM} M&Ms!😏`;
+            if (contadorMM > 1) {
+                document.querySelector("h2").textContent = `Agora me deve ${contadorMM} M&Ms🙌`
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!-- 7. Desafio de Cryptografia: Cifra de Vigenère
+Desafio: Agora, o nível subiu! Implemente a Cifra de Vigenère, 
+que é uma forma mais complexa da Cifra de César, 
+utilizando uma chave para criptografar e descriptografar a mensagem.
+ A chave pode ser repetida ou truncada dependendo do comprimento da mensagem. -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifra de Vinegère</title>
+</head>
+
+<body>
+    <input type="text" id="getTexto" placeholder="Texto">
+    <input type="text" id="getChave" placeholder="Chave para Criptografar">
+    <button onclick="funcaoParaCriptografarEDescriptografar('criptografar')">Criptografar</button>
+    <button onclick="funcaoParaCriptografarEDescriptografar('descriptografar')">Descriptografar</button>
+    <p>Para Descriptografar digite a mensagem criptografada no campo <strong>Texto</strong> e digite a chave de
+        encriptação</p>
+    <p>Saída:</p>
+    <p id="saidaTexto"></p>
+    <script>
+        function funcaoParaCriptografarEDescriptografar(acao) {
+            let texto = document.getElementById('getTexto').value;
+            let chave = document.getElementById('getChave').value;
+            let saida = document.getElementById('saidaTexto');
+            let resultado = '';
+            let j = 0;
+
+            console.log('mensagem recebida:', texto);
+            console.log('chave recebida:', chave);
+            for (let i = 0; i < texto.length; i++) {
+                let letra = texto[i];
+                if (letra.match(/[a-zA-Z]/i)) {
+                    let letraChave = chave[j % chave.length];
+                    let base = letra === letra.toLowerCase() ? 'a'.charCodeAt(0) : 'A'.charCodeAt(0);
+                    let codigoLetra = letra.charCodeAt(0);
+                    let deslocamento = letraChave.toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0);
+                    let novaPosicao = (codigoLetra - base + (acao === 'criptografar' ? deslocamento : -deslocamento) +26) % 26;
+                    let novaMensagem = String.fromCharCode(novaPosicao + base);
+                    resultado += novaMensagem
+                    j++;
+                } else {
+                    resultado += letra;
+                }
+            }
+            console.log(resultado);
+            saida.innerHTML = resultado;
+        }
+
+    </script>
+</body>
+
+</html>

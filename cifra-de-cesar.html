@@ -1,0 +1,52 @@
+<!-- Cifra de César (Desafio de Criptografia)
+Descrição: Implemente a cifra de César e crie um programa que consiga criptografar e descriptografar mensagens com uma chave.
+Técnicas: Criptografia simples, manipulação de strings. -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifra de Cesar</title>
+</head>
+
+<body>
+    <h1>Cifra de César⚔️</h1>
+    <input type="text" id="msgUser" placeholder="Digite a mensagem para criptografar">
+    <p>Deslocamento para direita</p>
+    <input type="number" id="nmrUser">
+    <button onclick="funcaoGenerica('criptografar')">Criptografar</button>
+    <button onclick="funcaoGenerica('descriptografar')">Descriptografar</button>
+    <p>Saida:</p>
+    <p id="saida"></p>
+
+    <script>
+        // Desafio: Criar uma função genérica que contém um único cálculo para criptografar e descriptografar, em apenas um bloco if.
+
+        function funcaoGenerica(acao) {
+            let mensagem = document.getElementById('msgUser').value;
+            let saidaTexto = document.getElementById('saida');
+            let deslocamento = parseInt(document.getElementById('nmrUser').value);
+            let resultado = '';
+
+            for (let i = 0; i < mensagem.length; i++) { //Percorre toda a mensagem
+                let letra = mensagem[i];
+
+                if ((letra >= 'a' && letra <= 'z') || (letra >= 'A' && letra <= 'Z')) {
+                    let base = letra === letra.toLowerCase() ? 'a'.charCodeAt(0) : 'A'.charCodeAt(0);
+                    let codigoLetra = letra.charCodeAt(0);
+                    let novaPosicao =  (codigoLetra - base + (acao === 'criptografar' ? deslocamento : -deslocamento) +26) % 26; //usa a ação
+                    let novaMensagem = String.fromCharCode(novaPosicao + base);
+                    resultado += novaMensagem
+                } else {
+                    resultado += letra;
+                }
+            }
+            console.log(resultado)
+            saidaTexto.innerHTML = resultado;
+        }
+        
+    </script>
+</body>
+
+</html>
