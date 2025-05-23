@@ -2,26 +2,42 @@
 Desafio: Crie uma função que verifique se uma palavra ou frase é um palíndromo 
 (uma palavra que é igual de trás para frente), mas sem usar o método .reverse()
  de array ou qualquer outro método built-in de reversão. A lógica precisa ser manual. -->
- <!DOCTYPE html>
- <html lang="pt-br">
- <head>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Palindromo</title>
- </head>
- <body>
+</head>
+
+<body>
     <!-- O que é Palindromo?
     R: Palindromo é uma palavra/frase que contém o mesmo significado de trás para frente
     Exemplo: Ovo, arara, reviver, asa, entre outros.. -->
     <input type="text" id="getPalindromo" placeholder="digita uma palavra">
     <button onclick="funcaoParaVerificarPalindromo()">Verificar</button>
-    <p id="SetSaida"></p>
+    <p id="setSaida"></p>
 
     <script>
         function funcaoParaVerificarPalindromo() {
-            let 
+            let entrada = document.getElementById('getPalindromo').value;
+            let resultado = document.getElementById('setSaida');
+            let ehPalindromo = true;
+            let entradaAjustada = entrada.toLowerCase();
+            for (let i = 0; i < entradaAjustada.length / 2; i++) { // Laço for para percorrer até metade da palavra
+                if (entradaAjustada[i] !== entradaAjustada[entradaAjustada.length - 1 - i]) { // if que compara a outra metade da String, caso for diferença ele já para de comparar e da o resultado
+                    ehPalindromo = false;
+                    break
+                }
+            }
+            if (ehPalindromo) {
+                resultado.innerHTML = `A palavra ${entrada} é um palindromo.`;
+            } else {
+                resultado.innerHTML = `A palavra ${entrada} não é um palindromo.`;
+            }
         }
-
     </script>
- </body>
- </html>
+</body>
+
+</html>
