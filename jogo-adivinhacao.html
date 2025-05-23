@@ -1,0 +1,55 @@
+<!-- 2. Adivinhação com Dicas
+Desafio: Crie um jogo onde o computador escolhe um número aleatório e 
+o jogador tem que adivinhar qual é. Porém, a cada tentativa o computador
+ vai dando dicas, como: "é maior", "é menor", "quase lá!". 
+ Faça o jogo continuar até o jogador acertar e, no final, exiba o número de tentativas. -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação</title>
+</head>
+
+<body>
+    <h1>Adivinhe o número de 1 a 100</h1>
+
+    <input type="number" id="getNumber" placeholder="Insira um número">
+    <button onclick="funcaoAdivinhacao()">Confirmar</button>
+    <p id="saida"></p>
+
+    <script>
+        const min = 1;
+        const max = 100;
+        const numeroSecreto = Math.floor(Math.random() * (max - min + 1)) + min;
+        let resultado = document.getElementById('saida');
+        let tentativas = 0;
+
+        function funcaoAdivinhacao() {
+            let chute = Number(document.getElementById('getNumber').value);
+            console.log('número secreto: ', numeroSecreto);
+            if (numeroSecreto === chute) {
+                resultado.innerText = 'parabéns, você acertou!!!🎉🎉🎉'
+            } else {
+                if (chute < numeroSecreto) {
+                    resultado.innerText = 'Quase... \nSeu chute foi menor';
+                    console.log('tentativas: ', tentativas);
+
+                } else {
+                    resultado.innerText = 'Quase... \nSeu chute foi maior';
+                    console.log(tentativas)
+
+                }
+                tentativas++;
+            }
+            if (tentativas >= 5) {
+                resultado.innerText = `Fim do jogo. Você não conseguiu acertar o número secreto. O número era: ${numeroSecreto}`;
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
